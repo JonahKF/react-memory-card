@@ -1,4 +1,5 @@
-// import { useState } from "react";
+import { useState, useEffect } from "react";
+import FetchPokemon from "./components/FetchPokemon";
 import "./styles/App.css";
 
 function App() {
@@ -9,6 +10,10 @@ function App() {
     <>
       <section id="center">
         <h1>Hello World!</h1>
+
+        <div className="fetch-test">
+          <FetchPokemon />
+        </div>
       </section>
 
       <div className="ticks"></div>
