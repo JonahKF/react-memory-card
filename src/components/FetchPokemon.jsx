@@ -1,29 +1,28 @@
 import { useState, useEffect } from "react";
-const FetchPokemon = () => {
-  const [pokemon, setPokemon] = useState(null);
+import PokemonCard from "./PokemonCard";
 
+const FetchPokemon = () => {
+  const [pokemonList, setPokemonList] = useState(null);
   useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon/35")
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=25")
       .then((res) => {
         return res.json();
       })
       .then((data) => {
         console.log(data);
-        setPokemon(data);
+        setPokemonList(data.results);
       });
   }, []);
 
-  if (!pokemon) return <p>Loading...</p>;
+  if (!pokemonList) return <p>Loading...</p>;
 
   return (
     <div>
-      <img
-        key={pokemon.id}
-        src={pokemon.sprites.front_default}
-        alt={pokemon.name}
-        width={100}
-      />
+      {pokemonList.map((pokemon, index) => (
+        <div key={index}>{pokemon.name}</div>
+      ))}
     </div>
   );
 };
+
 export default FetchPokemon;
