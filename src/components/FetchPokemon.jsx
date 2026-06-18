@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import PokemonCard from "./PokemonCard";
 
 const FetchPokemon = () => {
-  const maxPokemon = 1025;
+  const maxPokemon = 151;
+  // Max possible is 1025
 
-  const [pokemonList, setPokemonList] = useState(null);
+  const [pokemonList, setPokemonList] = useState([]);
   useEffect(() => {
     let pokemonArray = [];
     for (let i = 0; i < 25; i++) {
@@ -16,15 +17,18 @@ const FetchPokemon = () => {
       );
     }
     Promise.all(pokemonArray).then((data) => setPokemonList(data));
-    console.log(pokemonList);
   }, []);
 
-  if (!pokemonList) return <p>Loading...</p>;
+  if (pokemonList.length === 0) return <p>Loading...</p>;
+
+  console.log(pokemonList);
+
+  const onClick = () => console.log("Click");
 
   return (
     <div>
-      {pokemonList.map((pokemon, index) => (
-        <div key={index}>{pokemon.name}</div>
+      {pokemonList.map((pokemon) => (
+        <PokemonCard key={pokemon.id} pokemon={pokemon} onClick={onClick} />
       ))}
     </div>
   );

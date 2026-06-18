@@ -1,5 +1,5 @@
-const PokemonCard = (pokemon) => {
-  // FETCH pokemon
+const PokemonCard = ({ pokemon, onClick }) => {
+  return <button onClick={onClick}>{pokemon.name}</button>;
 };
 
 export default PokemonCard;
