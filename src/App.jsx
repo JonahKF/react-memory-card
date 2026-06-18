@@ -11,9 +11,7 @@ function App() {
       <section id="center">
         <h1>Hello World!</h1>
 
-        <div className="fetch-test">
-          <FetchPokemon />
-        </div>
+        <FetchPokemon />
       </section>
 
       <div className="ticks"></div>

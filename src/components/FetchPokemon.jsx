@@ -7,16 +7,27 @@ const FetchPokemon = () => {
 
   const [pokemonList, setPokemonList] = useState([]);
   useEffect(() => {
-    let pokemonArray = [];
-    for (let i = 0; i < 25; i++) {
-      const randomId = Math.floor(Math.random() * maxPokemon) + 1;
-      pokemonArray.push(
-        fetch(`https://pokeapi.co/api/v2/pokemon/${randomId}`).then((res) => {
-          return res.json();
-        }),
+    const fetchRandomPokemon = async () => {
+      const selectedIds = new Set();
+
+      while (selectedIds.size < 25) {
+        const randomId = Math.floor(Math.random() * maxPokemon) + 1;
+        selectedIds.add(randomId);
+      }
+
+      const promises = Array.from(selectedIds).map((id) =>
+        fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) =>
+          res.json(),
+        ),
       );
-    }
-    Promise.all(pokemonArray).then((data) => setPokemonList(data));
+
+      const data = await Promise.all(promises);
+      setPokemonList(data);
+    };
+
+    fetchRandomPokemon();
+
+    // return () => console.log("test");
   }, []);
 
   if (pokemonList.length === 0) return <p>Loading...</p>;
@@ -26,7 +37,7 @@ const FetchPokemon = () => {
   const onClick = () => console.log("Click");
 
   return (
-    <div>
+    <div className="card-container">
       {pokemonList.map((pokemon) => (
         <PokemonCard key={pokemon.id} pokemon={pokemon} onClick={onClick} />
       ))}
