@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import PokemonGrid from "./components/PokemonGrid";
+import shuffleArray from "./utils/shuffleArray";
 import "./styles/App.css";
 
 function App() {
@@ -21,11 +22,11 @@ function App() {
           .sort(() => 0.5 - Math.random())
           .slice(0, 16);
 
-        const detailPromises = randomSelection.map((p) =>
+        const detailedPokemonData = randomSelection.map((p) =>
           fetch(p.url, { signal: controller.signal }).then((res) => res.json()),
         );
 
-        const resultsData = await Promise.all(detailPromises);
+        const resultsData = await Promise.all(detailedPokemonData);
         setPokemonData(resultsData);
         setLoading(false);
       } catch (err) {
@@ -40,18 +41,6 @@ function App() {
   if (loading) return <p>Loading...</p>;
 
   console.log(pokemonData);
-
-  const shuffleArray = (array) => {
-    const shuffled = [...array];
-
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-
-    return shuffled;
-  };
 
   const reorderList = () => {
     const pokemonList = shuffleArray(pokemonData);
