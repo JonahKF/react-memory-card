@@ -6,6 +6,7 @@ import "./styles/App.css";
 function App() {
   const [pokemonData, setPokemonData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     const controller = new AbortController();
