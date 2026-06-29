@@ -44,6 +44,8 @@ function App() {
   console.log(pokemonData);
 
   const reorderList = () => {
+    setScore(score + 1);
+
     const pokemonList = shuffleArray(pokemonData);
 
     console.log(`Reordered: ${pokemonList}`);
@@ -52,7 +54,9 @@ function App() {
   };
 
   return (
-    <>
+    <div className="game-wrapper">
+      <div className="score">{score}</div>
+
       <section id="center">
         <h1>Pokemon Memory Game</h1>
 
@@ -63,22 +67,7 @@ function App() {
           without clicking the same one twice, you win!
         </div>
       </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <span>Bottom Left</span>
-        </div>
-        <div id="social">
-          <span>Bottom Right</span>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="spacer"></section>
-    </>
+    </div>
   );
 }
 

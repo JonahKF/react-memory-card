@@ -86,6 +86,14 @@ img {
     }
 }
 
+.score {
+    position: fixed;
+    top: 1rem;
+    right: 3rem;
+    width: 30px;
+    font-size: 2rem;
+}
+
 #center {
     display: flex;
     flex-direction: column;
