@@ -53,9 +53,14 @@ function App() {
   return (
     <>
       <section id="center">
-        <h1>Hello World!</h1>
+        <h1>Pokemon Memory Game</h1>
 
         <PokemonGrid pokemonData={pokemonData} onClick={reorderList} />
+
+        <div className="description">
+          Click a Pokemon to shuffle the cards! If you can click all 16 Pokemon
+          without clicking the same one twice, you win!
+        </div>
       </section>
 
       <div className="ticks"></div>
